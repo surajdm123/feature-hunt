@@ -11,6 +11,7 @@ import Product from './Components/Product';
 import Comments from './Components/Comments';
 import Header from './Components/Header';
 import Home from './Components/Home';
+import ProjectForm from './Components/ProjectForm';
 import {useState} from 'react';
 
 function App() {
@@ -18,6 +19,15 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route
+          path="/submit-project"
+          children={
+            <>
+              <Header setQuery={setQuery} />
+                <ProjectForm query={query} />
+            </>
+          }
+        />
         <Route
           path="/:id"
           children={
