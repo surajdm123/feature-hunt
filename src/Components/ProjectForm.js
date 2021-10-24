@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 
 const Styles = styled.div`
- background: lavender;
+ background: #218888;
  padding: 20px;
 
- h1 {
+ h3 {
    border-bottom: 1px solid white;
-   color: #3d3d3d;
+   color: #6f6f6f;
    font-family: sans-serif;
    font-size: 20px;
    font-weight: 600;
@@ -24,7 +24,7 @@ const Styles = styled.div`
    justify-content: space-around;
    margin: 0 auto;
    max-width: 500px;
-   padding: 30px 50px;
+   padding: 50px 200px;
  }
 
  input {
@@ -36,7 +36,7 @@ const Styles = styled.div`
  }
 
  label {
-   color: #3d3d3d;
+   color: #6f6f6f;
    display: block;
    font-family: sans-serif;
    font-size: 14px;
@@ -52,7 +52,7 @@ const Styles = styled.div`
  }
 
  .submitButton {
-   background-color: #6976d9;
+   background-color: #6f6f6f;
    color: white;
    font-family: sans-serif;
    font-size: 14px;
@@ -64,25 +64,23 @@ function ProjectForm() {
   const handleSubmit = event => {
     event.preventDefault();
    setSubmitting(true);
-
-   setTimeout(() => {
-     setSubmitting(false);
-   }, 3000)
    }
 
   return (
     <div className="container">
       <div className="child">
         <div className="product-title">
-          <h3>PROJECT FORM</h3>
+
         </div>
       </div>
           <form onSubmit={handleSubmit}>
+               <h3>PROJECT FORM</h3>
             <fieldset>
               <label>Name</label>
                 <input name="name" />
               <label>Description</label>
-                <input name="description" />
+                <textarea name="description" rows="4" cols="50" >
+                </textarea>
                 <label>Image URL</label>
                 <input name="imageURL" />
             </fieldset>
