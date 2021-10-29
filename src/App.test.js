@@ -1,7 +1,12 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import {Route as RRoute } from "react-router-dom";
+import {Router as RRouter } from "react-router-dom";
 import Router from "react-router-dom";
+import { createMemoryHistory } from 'history'
+import { MemoryRouter } from 'react-router-dom'
+
 import Product from './Components/Product';
 import Feature from './Components/Feature';
 import Comments from './Components/Comments';
@@ -10,8 +15,8 @@ import Dashboard from './Components/Dashboard'
 import Login from './Components/Login'
 import Header from './Components/Header'
 import Feedback from './Components/Feedback';
-import { createMemoryHistory } from 'history'
-import { MemoryRouter } from 'react-router-dom'
+import Home from './Components/Home'
+
 import './setupTests'
 
 // import Service from './Service';
@@ -31,6 +36,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }));
 
+///// ORIGINAL TESTS /////
 
 test('renders home page', () => {
   render(<App />);
@@ -74,56 +80,69 @@ test('renders product tile', () => {
   expect(decscription).toBeInTheDocument();
 })
 
-test('home page: checks for sort by', () => {
+///////// TESTS ADDED BY GROUP 25 /////////
+
+test('renders home page: additional screen checks', () => {
   render(<App />)
   const popular = screen.getByText(/POPULAR/i);
   const latest = screen.getByText(/LATEST/i);
+  const discover = screen.getByPlaceholderText(/Discover Projects.../i);
   expect(popular).toBeInTheDocument();
   expect(latest).toBeInTheDocument();
+  expect(discover).toBeInTheDocument();
 })
 
-test('home page: checks placeholder search bar text', () => {
-  render(<App />)
-  const discoverprojects = screen.getByPlaceholderText(/Discover Projects.../i);
-  expect(discoverprojects).toBeInTheDocument();
-})
-
-test('renders Header', () => {
+test('renders header: screen checks 1', () => {
   render(<Header />, {wrapper: MemoryRouter})
   const submitProject = screen.getByText(/Submit Project/i);
   const roadmap = screen.getByText(/Roadmap/i);
   const feedback = screen.getByText(/Feedback/i);
+
+  const logout = screen.getByText(/LogOut/i);
+  expect(logout).toBeInTheDocument();
 
   expect(submitProject).toBeInTheDocument();
   expect(roadmap).toBeInTheDocument();
   expect(feedback).toBeInTheDocument();
 })
 
-//TODO: test a comment
+test('renders header: screen checks 2', () => {
+  const history = createMemoryHistory();
+  history.push('/:id');
+  history.push('/dashboard')
+  render(
+    <RRouter history={history}>
+      <Header />
+    </RRouter>
+  );
+  const search = screen.getByPlaceholderText(/Search Features.../i);
+  expect(search).toBeInTheDocument();
+  expect(history.length).toBe(3);
+  expect(history.location.pathname).toBe('/dashboard');
+});
+
+//TODO: test a comment on feedback
 test('renders feedback', () => {
-  render(<Feedback />, {wrapper: MemoryRouter})
-  // TODO: FIX. Should be /Search Features.../i instead. Need to handle router memory.
-  const searchfeatures = screen.getByPlaceholderText(/Discover Projects.../i);
+  const history = createMemoryHistory();
+  history.push('/:id');
+  //history.push('/feedback')
+  render(
+    <RRouter history={history}>
+      <Feedback />
+    </RRouter>
+  );
+  const search = screen.getByPlaceholderText(/Search Features.../i);
   const commstr = screen.getByText(/Leave a comment in the box below/i);
   const patient = screen.getByText(/May take some time to load, please be patient!/i);
+  expect(search).toBeInTheDocument();
   expect(commstr).toBeInTheDocument();
   expect(patient).toBeInTheDocument();
+
+  expect(history.length).toBe(2);
+  expect(history.location.pathname).toBe('/:id');
 })
 
-//TODO
-/*test('Features: test upvote', () => {
-  const features = [{"id": 1, "text": "Create dashboard for product owners", "votes": 1, "timestamp": 1530815581293, "tags": ["enhancement"]}, {"id": 2, "text": "Create product page", "votes": 1, "timestamp": 1530814681293, "tags": ["enhancement"]}, {"id": 3, "text": "Make likes consistent", "votes": 3, "timestamp": 1530814981293, "tags": ["bug fix"]}];
-  jest.spyOn(Router, 'useParams').mockReturnValue({ id: 'feature-hunt' })
-  render(<Feature features={features} index={0} setFeatures={()=>console.log()}/>)
-  NYI
-})*/
-
-//TODO
-/*test('login', () => { 
-  NYI
-
-})*/
-
+/*
 test('placeholder search bar text on project', () => {
   jest.spyOn(Router, 'useParams').mockReturnValue({ id: 'feature-hunt' })
   render(<Header />, {wrapper: MemoryRouter})
@@ -139,16 +158,54 @@ test('placeholder search bar text on project', () => {
   expect(roadmap).toBeInTheDocument();
   expect(feedback).toBeInTheDocument();
 })
+*/
 
-//TODO: FIX ME
-test('placeholder search bar text on feedback', () => {
-  jest.spyOn(Router, 'useParams').mockReturnValue({id: 'feedback' })
-  //render(<Feedback />)
-  render(<Header />, {wrapper: MemoryRouter})
-  // TODO: FIX. Should be /Search Features.../i instead. Need to handle router memory.
-  const searchfeatures = screen.getByPlaceholderText(/Discover Projects.../i);
-  expect(searchfeatures).toBeInTheDocument();
+test('renders Home.js', () => {
+  render(<Home />, {wrapper: MemoryRouter})
+  const prod = screen.getByText(/PRODUCTS/i);
+  const popular = screen.getByText(/POPULAR/i);
+  const latest = screen.getByText(/LATEST/i);
+  expect(prod).toBeInTheDocument();
+  expect(popular).toBeInTheDocument();
+  expect(latest).toBeInTheDocument();
 })
+
+test('renders dashboard', () => {
+  render(<Dashboard />, {wrapper: MemoryRouter})
+  const yourproj = screen.getByText(/Your Projects/i);
+  expect(yourproj).toBeInTheDocument();
+})
+
+
+test('renders Product, Feature, ProductTile: additional screen checks', () => {
+  const history = createMemoryHistory();
+  const features = [{"id": 1, "text": "Create dashboard for product owners", "votes": 1, "timestamp": 1530815581293, "tags": ["enhancement"]}, {"id": 2, "text": "Create product page", "votes": 1, "timestamp": 1530814681293, "tags": ["enhancement"]}, {"id": 3, "text": "Make likes consistent", "votes": 3, "timestamp": 1530814981293, "tags": ["bug fix"]}];
+  const products = [{'id': 1, 'name': 'feature-hunt', 'description': "Feature Hunt is a...", 'votes': 2, 'tags': ['productivity','web app']}];
+
+  history.push('/:id');
+
+  jest.spyOn(Router, 'useParams').mockReturnValue({ id: 'feature-hunt' })
+  render(
+    <RRouter history={history}>
+      <Feature features={features} index={0} setFeatures={()=>console.log()} />
+      <ProductTile products={products} index={0} setProducts={()=>console.log()}/>
+      <Product query/>
+    </RRouter>
+  );
+
+  const enterfeature = screen.getByPlaceholderText(/Enter a feature that you'd love to see/i);
+  expect(enterfeature).toBeInTheDocument();
+
+  //userEvent.click(upvote);
+  expect(history.length).toBe(2);
+  expect(history.location.pathname).toBe('/:id');
+});
+
+test('renders login', () => {
+  render(<Login />);
+  const login = screen.getByText(/Login/i);
+  expect(login).toBeInTheDocument();
+});
 
 // TODO: login!
 test('display Your Projects in header with logged in user', () => {
@@ -158,7 +215,18 @@ test('display Your Projects in header with logged in user', () => {
   expect(yourproj).toBeInTheDocument();
 });
 
+
+//TODO
+/*test('Features: test upvote', () => {
+  const features = [{"id": 1, "text": "Create dashboard for product owners", "votes": 1, "timestamp": 1530815581293, "tags": ["enhancement"]}, {"id": 2, "text": "Create product page", "votes": 1, "timestamp": 1530814681293, "tags": ["enhancement"]}, {"id": 3, "text": "Make likes consistent", "votes": 3, "timestamp": 1530814981293, "tags": ["bug fix"]}];
+  jest.spyOn(Router, 'useParams').mockReturnValue({ id: 'feature-hunt' })
+  render(<Feature features={features} index={0} setFeatures={()=>console.log()}/>)
+  NYI
+})*/
+
+
 /*
 test('logout on click', () => {
   NYI
 });*/
+
