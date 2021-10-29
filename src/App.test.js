@@ -16,8 +16,8 @@ import Login from './Components/Login'
 import Header from './Components/Header'
 import Feedback from './Components/Feedback';
 import Home from './Components/Home'
-import './setupTests'
 
+import './setupTests'
 
 // import Service from './Service';
 
@@ -36,6 +36,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }));
 
+///// ORIGINAL TESTS /////
 
 test('renders home page', () => {
   render(<App />);
@@ -79,7 +80,7 @@ test('renders product tile', () => {
   expect(decscription).toBeInTheDocument();
 })
 
-///////// ADDED TESTS /////////
+///////// TESTS ADDED BY GROUP 25 /////////
 
 test('renders home page: additional screen checks', () => {
   render(<App />)
@@ -96,8 +97,10 @@ test('renders header: screen checks 1', () => {
   const submitProject = screen.getByText(/Submit Project/i);
   const roadmap = screen.getByText(/Roadmap/i);
   const feedback = screen.getByText(/Feedback/i);
+
   const logout = screen.getByText(/LogOut/i);
   expect(logout).toBeInTheDocument();
+
   expect(submitProject).toBeInTheDocument();
   expect(roadmap).toBeInTheDocument();
   expect(feedback).toBeInTheDocument();
@@ -198,7 +201,6 @@ test('renders Product, Feature, ProductTile: additional screen checks', () => {
   expect(history.location.pathname).toBe('/:id');
 });
 
-
 test('renders login', () => {
   render(<Login />);
   const login = screen.getByText(/Login/i);
@@ -213,6 +215,7 @@ test('display Your Projects in header with logged in user', () => {
   expect(yourproj).toBeInTheDocument();
 });
 
+
 //TODO
 /*test('Features: test upvote', () => {
   const features = [{"id": 1, "text": "Create dashboard for product owners", "votes": 1, "timestamp": 1530815581293, "tags": ["enhancement"]}, {"id": 2, "text": "Create product page", "votes": 1, "timestamp": 1530814681293, "tags": ["enhancement"]}, {"id": 3, "text": "Make likes consistent", "votes": 3, "timestamp": 1530814981293, "tags": ["bug fix"]}];
@@ -220,3 +223,10 @@ test('display Your Projects in header with logged in user', () => {
   render(<Feature features={features} index={0} setFeatures={()=>console.log()}/>)
   NYI
 })*/
+
+
+/*
+test('logout on click', () => {
+  NYI
+});*/
+

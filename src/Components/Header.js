@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/header.scss';
 import { useHistory, useLocation } from 'react-router-dom';
-import {ReactSession} from 'react-client-session';
+import { ReactSession } from 'react-client-session';
 import Login from './Login';
 
 function Header({setQuery}) {
@@ -54,6 +54,7 @@ function Header({setQuery}) {
                 <li onClick={goTo('feature-hunt')}>RoadMap</li>
                 <li onClick={goTo('feedback')}>Feedback</li>
                 {loggedin && <li onClick={goTo('dashboard')}>Your Projects</li>}
+
               </ul>
             </div>
           </div>
