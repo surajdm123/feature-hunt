@@ -165,7 +165,6 @@ test('renders Home.js', () => {
   expect(prod).toBeInTheDocument();
   expect(popular).toBeInTheDocument();
   expect(latest).toBeInTheDocument();
-
 })
 
 test('renders dashboard', () => {
@@ -199,6 +198,12 @@ test('renders Product, Feature, ProductTile: additional screen checks', () => {
   expect(history.location.pathname).toBe('/:id');
 });
 
+
+test('renders login', () => {
+  render(<Login />);
+  const login = screen.getByText(/Login/i);
+  expect(login).toBeInTheDocument();
+});
 
 // TODO: login!
 test('display Your Projects in header with logged in user', () => {
