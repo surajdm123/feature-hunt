@@ -45,7 +45,7 @@ jest.mock("react-router-dom", () => ({
 describe("Test Product", () => {
 
   //TODO: FIGURE OUT HOW TO CHECK IF THE CLASS IS HIGHLIGHTED OR NOT.
-  it("tests sort by (TODO)", () => {
+  it("tests sort by", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
 
