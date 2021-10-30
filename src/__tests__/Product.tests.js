@@ -94,6 +94,11 @@ describe("Test Product", () => {
 
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
+
+    const popsort = getByTestId("prod_sortpop");
+    const timesort = getByTestId("prod_sorttime");
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
   });
 
   it("tests adding empty feature", () => {
@@ -114,7 +119,10 @@ describe("Test Product", () => {
     const nottag = screen.queryByText(/Enhancement/i) // ensure the default tag is absent
     expect(nottag).not.toBeInTheDocument()
 
-
+    const popsort = getByTestId("prod_sortpop");
+    const timesort = getByTestId("prod_sorttime");
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
   });
 
   it("tests adding a feature to an existing list of features", () => {
@@ -164,6 +172,11 @@ describe("Test Product", () => {
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
 
+    const popsort = getByTestId("prod_sortpop");
+    const timesort = getByTestId("prod_sorttime");
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
+
   });
 
   it("tests adding an empty feature to an existing list of features", () => {
@@ -212,5 +225,9 @@ describe("Test Product", () => {
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
 
+    const popsort = getByTestId("prod_sortpop");
+    const timesort = getByTestId("prod_sorttime");
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
   });
 });
