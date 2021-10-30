@@ -44,6 +44,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Test Product", () => {
 
+  //TODO: FIGURE OUT HOW TO CHECK IF THE CLASS IS HIGHLIGHTED OR NOT.
   it("tests sort by (TODO)", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
@@ -59,6 +60,7 @@ describe("Test Product", () => {
     const popsort = getByTestId("prod_sortpop");
     const timesort = getByTestId("prod_sorttime");
     fireEvent.click(timesort);
+    fireEvent.click(popsort);
 
     // uncomment the two lines below in VS Code.
     // In the terminal, enter: npm run test.
@@ -92,6 +94,27 @@ describe("Test Product", () => {
 
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
+  });
+
+  it("tests adding empty feature", () => {
+    const history = createMemoryHistory();
+    history.push("/:id"); // home page
+
+    jest.spyOn(Router, "useParams").mockReturnValue({ id: "feature-hunt" });
+    const { getByTestId } = render(
+      <RRouter history={history}>
+        <Product />
+      </RRouter>
+    );
+    const input = getByTestId("prod_input");
+    const nuval = "";
+    fireEvent.change(input, { target: { value: nuval } });
+    fireEvent.submit(getByTestId("prod_form")); // submit the new feature
+
+    const nottag = screen.queryByText(/Enhancement/i) // ensure the default tag is absent
+    expect(nottag).not.toBeInTheDocument()
+
+
   });
 
   it("tests adding a feature to an existing list of features", () => {
@@ -140,5 +163,54 @@ describe("Test Product", () => {
 
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
+
+  });
+
+  it("tests adding an empty feature to an existing list of features", () => {
+    const history = createMemoryHistory();
+    history.push("/:id"); // home page
+
+    const features = [
+      {
+        id: 1,
+        text: "Make likes consistent",
+        votes: 91190,
+        timestamp: 1530814981295,
+        tags: ["bug fix"],
+      },
+    ];
+
+    jest.spyOn(Router, "useParams").mockReturnValue({ id: "feature-hunt" });
+    const { getByTestId } = render(
+      <RRouter history={history}>
+        <Feature
+          features={features}
+          index={0}
+          setFeatures={() => console.log()}
+        />
+        <Product />
+      </RRouter>
+    );
+
+    const form = getByTestId("prod_form"); // for reference
+    const input = getByTestId("prod_input");
+    const nuval = "";
+    fireEvent.change(input, { target: { value: nuval } });
+
+    fireEvent.submit(getByTestId("prod_form")); // submit the new feature
+
+    const nottag = screen.queryByText(/Enhancement/i) // ensure the default tag is absent
+    expect(nottag).not.toBeInTheDocument()
+
+    const makel = screen.getByText(/Make likes consistent/i);
+    expect(makel).toBeInTheDocument();
+    const bugfix = screen.getByText(/Bug fix/i);
+    expect(bugfix).toBeInTheDocument();
+    const votecount = screen.getByText("91190");
+    expect(votecount).toBeInTheDocument();
+
+    const projectName = screen.getByText(/Feature-hunt/i);
+    expect(projectName).toBeInTheDocument();
+
   });
 });
