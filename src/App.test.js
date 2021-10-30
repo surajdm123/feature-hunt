@@ -174,6 +174,11 @@ test('renders dashboard', () => {
   render(<Dashboard />, {wrapper: MemoryRouter})
   const yourproj = screen.getByText(/Your Projects/i);
   expect(yourproj).toBeInTheDocument();
+
+  const popular = screen.getByText(/POPULAR/i);
+  const latest = screen.getByText(/LATEST/i);
+  expect(popular).toBeInTheDocument();
+  expect(latest).toBeInTheDocument();
 })
 
 
