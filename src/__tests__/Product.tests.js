@@ -95,6 +95,7 @@ describe("Test Product", () => {
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
 
+    // coverage clicks
     const popsort = getByTestId("prod_sortpop");
     const timesort = getByTestId("prod_sorttime");
     fireEvent.click(timesort);
@@ -119,6 +120,7 @@ describe("Test Product", () => {
     const nottag = screen.queryByText(/Enhancement/i) // ensure the default tag is absent
     expect(nottag).not.toBeInTheDocument()
 
+    // coverage clicks
     const popsort = getByTestId("prod_sortpop");
     const timesort = getByTestId("prod_sorttime");
     fireEvent.click(timesort);
@@ -172,6 +174,7 @@ describe("Test Product", () => {
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
 
+    // coverage clicks
     const popsort = getByTestId("prod_sortpop");
     const timesort = getByTestId("prod_sorttime");
     fireEvent.click(timesort);
@@ -225,6 +228,7 @@ describe("Test Product", () => {
     const projectName = screen.getByText(/Feature-hunt/i);
     expect(projectName).toBeInTheDocument();
 
+    // coverage clicks
     const popsort = getByTestId("prod_sortpop");
     const timesort = getByTestId("prod_sorttime");
     fireEvent.click(timesort);

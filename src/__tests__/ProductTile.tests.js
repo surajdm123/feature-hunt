@@ -50,7 +50,10 @@ describe("Test ProductTile", () => {
 
     const { getByTestId } = render(
       <RRouter history={history}>
-        <ProductTile products={products} index={0} setProducts={() => console.log()}
+        <ProductTile
+          products={products}
+          index={0}
+          setProducts={() => console.log()}
         />
       </RRouter>
     );
@@ -157,15 +160,7 @@ describe("Test ProductTile", () => {
       },
     ];
 
-    const nuprod = {
-      id: 2,
-      name: "anti-JS",
-      description: "I really, really hate JavaScript.",
-      votes: 9001,
-      tags: ["depression"],
-    };
-
-    const { getByTestId } = render(
+    const { getByTestId, getByText, getByAltText } = render(
       <RRouter history={history}>
         <ProductTile
           products={products}
@@ -176,17 +171,20 @@ describe("Test ProductTile", () => {
     );
 
     expect(history.length).toBe(2);
-    const goto = products[1];
-    const nav = getByTestId("pt_nav");
+    //const goto = products[1];
+    const nav = getByTestId("pt_nav"); //, { product: goto });
+    //const getp = getByAltText(/Anti-JS/i);
+
     fireEvent.click(nav);
     //fireEvent.click(goto);
+    //fireEvent.click(getp);
 
-    expect(history.length).toBe(3);
+    expect(history.length).toBe(3); // after clicking on something, history.length + 1
     expect(history.location.pathname).toBe("/feature-hunt"); // goal: navigate to anti-js
 
-    const productName = screen.getByText(/Feature-hunt/i);
-    const tagName = screen.getByText(/PRODUCTIVITY/i);
-    const decscription = screen.getByText(/Feature Hunt is.../i);
+    const productName = getByText(/Feature-hunt/i);
+    const tagName = getByText(/PRODUCTIVITY/i);
+    const decscription = getByText(/Feature Hunt is.../i);
     expect(productName).toBeInTheDocument();
     expect(tagName).toBeInTheDocument();
     expect(decscription).toBeInTheDocument();
@@ -204,7 +202,7 @@ describe("Test ProductTile", () => {
     const tagName2 = screen.getByText(/depression/i);
     const decscription2 = screen.getByText(/I really, really hate JavaScript./i);
 
-    const over9k = screen.getByText("9001");
+    const over9k = getByText("9001");
     expect(over9k).toBeInTheDocument();
 
     expect(productName2).toBeInTheDocument();
@@ -216,7 +214,7 @@ describe("Test ProductTile", () => {
     // In the terminal, enter: npm run test.
     // The document should appear.
 
-    // const whee = screen.getByText("whee");
-    // expect(whee).toBeInTheDocument();
+    //const whee = screen.getByText("whee");
+    //expect(whee).toBeInTheDocument();
   });
 });
