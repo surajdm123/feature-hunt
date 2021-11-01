@@ -36,7 +36,10 @@ const ProductTile = ({ products, index, setProducts }) => {
         </div>
         <div className="content">
           <div className="product-content">
-            <span className="product-title" data-testid="pt_nav" onClick={goTo(products[index].name)} style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+            <span className="product-title" 
+            data-testid="pt_nav" 
+            onClick={goTo(products[index].name)} 
+            style={{ marginTop: 'auto', marginBottom: 'auto' }}>
               {capitalizeFirstLetter(products[index].name)}
             </span>
             <p className="product-description">
@@ -54,13 +57,20 @@ const ProductTile = ({ products, index, setProducts }) => {
         </div>
         <div className="votes-container">
           <span>
-            <FontAwesomeIcon icon={faChevronUp} size="lg" className={products[index].upVoted ? 'votedUp' : 'voteup'} data-testid="pt_up" onClick={upVote} />
+            <FontAwesomeIcon icon={faChevronUp} size="lg" 
+            className={products[index].upVoted ? 'votedUp' : 'voteup'} 
+            data-testid="pt_up" 
+            onClick={upVote} />
           </span>
           <span>
             {products[index].votes}
           </span>
           <span>
-            <FontAwesomeIcon icon={faChevronDown} size="lg" className={products[index].downVoted ? 'votedDown' : 'votedown'} data-testid="pt_down" onClick={downVote} />
+            <FontAwesomeIcon icon={faChevronDown} 
+            size="lg" 
+            className={products[index].downVoted ? 'votedDown' : 'votedown'} 
+            data-testid="pt_down" 
+            onClick={downVote} />
           </span>
         </div>
       </div>

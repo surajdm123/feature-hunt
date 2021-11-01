@@ -12,12 +12,12 @@ import Router from "react-router-dom";
 import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom/extend-expect";
 
-import Login from "../Components/Login";
+import Dashboard from "../Components/Dashboard";
 
 import "../setupTests";
 
 /**
- * This file tests Login.js
+ * This file tests Dashboard.js
  *
  * GitHub repository: CSC510-Group-25/feature-hunt
  *
@@ -28,30 +28,19 @@ import "../setupTests";
  * */
 
 /*
-Login.js test IDs:
+Dashboard.js test IDs:
 
-data-testid="login_button"            -- login button
-data-testid="login_title"             -- dialog title
-data-testid="login_text"              -- dialog text
-data-testid="login_email"             -- email text field
-"data-testid": "login_inputEmail"     -- email input prop
-data-testid="login_password"          -- password text field
-"data-testid": "login_inputPassword"  -- password input prop
-data-testid="login_cancel"            -- cancel button
-data-testid="login_submit"            -- submit button
-data-testid="login_error"             -- login error
+data-testid="dash_alert"    -- alert
+data-testid="dash_proj"     -- projects
+data-testid="dash_user"     -- username
+data-testid="dash_sortpop"  -- sort by votes
+data-testid="dash_sorttime" -- sort by latest
 data-testid="TEXT" -- short description
 
 */
 
-describe("Login tests", () => {
 
-  it("renders login", () => {
-    render(<Login />);
-    const login = screen.getByText(/Login/i);
-    expect(login).toBeInTheDocument();
-  });
-
+describe("Dashboard tests", () => {
   it("does things1", () => {
     /*
       const history = createMemoryHistory();
@@ -64,6 +53,26 @@ describe("Login tests", () => {
       const thing1 = getByTestId("thing1");
       //expect(thing1.children.length).toBe(4);
       */
+  });
+
+  it("renders dashboard", () => {
+    const history = createMemoryHistory();
+      history.push('/:id');
+      const { getByTestId } = render(
+        <RRouter history={history}>
+          <Dashboard />
+        </RRouter>
+      );
+      //const thing1 = getByTestId("thing1");
+      //expect(thing1.children.length).toBe(4);
+      
+    //const yourproj = screen.getByText(/Your Projects/i);
+   // expect(yourproj).toBeInTheDocument();
+  
+   // const popular = screen.getByText(/POPULAR/i);
+   // const latest = screen.getByText(/LATEST/i);
+   // expect(popular).toBeInTheDocument();
+    //expect(latest).toBeInTheDocument();
   });
 
   it("does things2", () => {

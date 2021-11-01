@@ -33,6 +33,7 @@ data-testid="pt_up" -- product tile upvote
 */
 
 describe("Test ProductTile", () => {
+
   // this test doesn't work
   it("tests upvoting on a product (TODO)", () => {
     const history = createMemoryHistory();
@@ -48,7 +49,7 @@ describe("Test ProductTile", () => {
       },
     ];
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <RRouter history={history}>
         <ProductTile
           products={products}
@@ -66,9 +67,9 @@ describe("Test ProductTile", () => {
     //  const nuvote = screen.getByText(/1000/i);
     // expect(nuvote).toBeInTheDocument();
 
-    const productName = screen.getByText(/Feature-hunt/i);
-    const tagName = screen.getByText(/PRODUCTIVITY/i);
-    const decscription = screen.getByText(/Feature Hunt is.../i);
+    const productName = getByText(/Feature-hunt/i);
+    const tagName = getByText(/PRODUCTIVITY/i);
+    const decscription = getByText(/Feature Hunt is.../i);
     expect(productName).toBeInTheDocument();
     expect(tagName).toBeInTheDocument();
     expect(decscription).toBeInTheDocument();
@@ -100,7 +101,7 @@ describe("Test ProductTile", () => {
       },
     ];
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <RRouter history={history}>
         <ProductTile
           products={products}
@@ -118,9 +119,9 @@ describe("Test ProductTile", () => {
     //  const nuvote = screen.getByText("999");
     //  expect(nuvote).toBeInTheDocument();
 
-    const productName = screen.getByText(/Feature-hunt/i);
-    const tagName = screen.getByText(/PRODUCTIVITY/i);
-    const decscription = screen.getByText(/Feature Hunt is.../i);
+    const productName = getByText(/Feature-hunt/i);
+    const tagName = getByText(/PRODUCTIVITY/i);
+    const decscription = getByText(/Feature Hunt is.../i);
     expect(productName).toBeInTheDocument();
     expect(tagName).toBeInTheDocument();
     expect(decscription).toBeInTheDocument();
@@ -191,8 +192,8 @@ describe("Test ProductTile", () => {
 
     // coverage clicks
     const upvote = getByTestId("pt_up");
-    fireEvent.click(upvote);
     const downvote = getByTestId("pt_down");
+    fireEvent.click(upvote);
     fireEvent.click(downvote);
 
     // the block below doesn't work

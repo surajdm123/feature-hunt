@@ -17,7 +17,7 @@ import SignUp from "../Components/SignUp";
 import "../setupTests";
 
 /**
- * This file tests XYZ.js
+ * This file tests SignUp.js
  *
  * GitHub repository: CSC510-Group-25/feature-hunt
  *
@@ -28,13 +28,24 @@ import "../setupTests";
  * */
 
 /*
-XYZ.js test IDs:
-
+SignUp.js test IDs:
+data-testid="signup_button"           -- signup button
+data-testid="signup_dialog_title"     -- dialog title
+data-testid="signup_dialog_text"      -- dialog text
+data-testid="signup_name"             -- name text field
+"data-testid": "signup_inputName"     -- name input prop
+data-testid="signup_email"            -- email text field
+"data-testid": "signup_inputEmail"    -- email input prop
+data-testid="signup_password"         -- password text field
+"data-testid": "signup_inputPassword" -- password input prop
+data-testid="signup_cancel"           -- cancel button
+data-testid="signup_submit"           -- submit button
+data-testid="signup_error"            -- alert error
 data-testid="TEXT" -- short description
 
 */
 
-describe("Header tests", () => {
+describe("SignUp tests", () => {
   it("does things1", () => {
     /*
       const history = createMemoryHistory();
