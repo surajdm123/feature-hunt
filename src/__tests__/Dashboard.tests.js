@@ -23,6 +23,7 @@ import "../setupTests";
  *
  * Authored by: Group 25
  *
+ * Leila Moran (GitHub ID: snapcat)
  * NAME (GitHub ID: GHID)
  *
  * */
@@ -39,53 +40,64 @@ data-testid="TEXT" -- short description
 
 */
 
-
 describe("Dashboard tests", () => {
-  it("does things1", () => {
-    /*
-      const history = createMemoryHistory();
-      history.push('/:id');
-      const { getByTestId } = render(
-        <RRouter history={history}>
-          <Thing />
-        </RRouter>
-      );
-      const thing1 = getByTestId("thing1");
-      //expect(thing1.children.length).toBe(4);
-      */
-  });
-
   it("renders dashboard", () => {
     const history = createMemoryHistory();
-      history.push('/:id');
-      const { getByTestId } = render(
-        <RRouter history={history}>
-          <Dashboard />
-        </RRouter>
-      );
-      //const thing1 = getByTestId("thing1");
-      //expect(thing1.children.length).toBe(4);
-      
-    //const yourproj = screen.getByText(/Your Projects/i);
-   // expect(yourproj).toBeInTheDocument();
-  
-   // const popular = screen.getByText(/POPULAR/i);
-   // const latest = screen.getByText(/LATEST/i);
-   // expect(popular).toBeInTheDocument();
-    //expect(latest).toBeInTheDocument();
+    history.push("/:id");
+
+    const { getByTestId, getByText, getByPlaceholderText } = render(
+      <RRouter history={history}>
+        <Dashboard />
+      </RRouter>
+    );
+
+    // check presence of sort by
+    const popular = getByText(/POPULAR/i);
+    const latest = getByText(/LATEST/i);
+    const yourproj = getByText(/YOUR PROJECTS-/i);
+    const alertm = getByText(/You are logged in as/i);
+
+    expect(popular).toBeInTheDocument();
+    expect(latest).toBeInTheDocument();
+    expect(yourproj).toBeInTheDocument();
+    expect(alertm).toBeInTheDocument();
+
+    // header
+    const search = getByPlaceholderText(/Search Features.../i);
+    expect(search).toBeInTheDocument();
+
+    const headproj = getByText("Your Projects");
+    expect(headproj).toBeInTheDocument();
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    //const whee = screen.getByText("whee");
+    // expect(whee).toBeInTheDocument();
   });
 
-  it("does things2", () => {
-    /*
-      const history = createMemoryHistory();
-      history.push('/:id');
-      const { getByTestId } = render(
-        <RRouter history={history}>
-          <Thing />
-        </RRouter>
-      );
-      const thing1 = getByTestId("thing1");
-      //expect(thing1.children.length).toBe(4);
-      */
+  it("tests Dashboard sort by", () => {
+    const history = createMemoryHistory();
+    history.push("/:id");
+    const { getByTestId, getByText, getByPlaceholderText } = render(
+      <RRouter history={history}>
+        <Dashboard />
+      </RRouter>
+    );
+
+    const popsort = getByTestId("dash_sortpop");
+    const timesort = getByTestId("dash_sorttime");
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
+    fireEvent.click(timesort);
+    fireEvent.click(popsort);
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    //const whee = screen.getByText("whee");
+    //expect(whee).toBeInTheDocument();
   });
 });
