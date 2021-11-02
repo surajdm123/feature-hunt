@@ -110,7 +110,7 @@ export default function SignUp() {
         {message !== "" && <Alert severity='error' data-testid="signup_error">{message}</Alert>}
         <DialogActions>
           <Button data-testid="signup_cancel" onClick={handleClose}>Cancel</Button>
-          <Button data-testid="signup_submit" onClick={handleSubmit}>Sumbit</Button>
+          <Button data-testid="signup_submit" onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
