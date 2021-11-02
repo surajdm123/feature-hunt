@@ -1,19 +1,10 @@
-/*
-
-LICENSE GOES HERE
-
-*/
-
 import React from "react";
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import { Route as RRoute } from "react-router-dom";
 import { Router as RRouter } from "react-router-dom"; // NOT A TYPO
-import Router from "react-router-dom";
 import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom/extend-expect";
 
 import Dashboard from "../Components/Dashboard";
-
 import "../setupTests";
 
 /**
@@ -22,10 +13,7 @@ import "../setupTests";
  * GitHub repository: CSC510-Group-25/feature-hunt
  *
  * Authored by: Group 25
- *
  * Leila Moran (GitHub ID: snapcat)
- * NAME (GitHub ID: GHID)
- *
  * */
 
 /*
@@ -37,7 +25,6 @@ data-testid="dash_user"     -- username
 data-testid="dash_sortpop"  -- sort by votes
 data-testid="dash_sorttime" -- sort by latest
 data-testid="TEXT" -- short description
-
 */
 
 describe("Dashboard tests", () => {

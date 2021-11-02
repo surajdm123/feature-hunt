@@ -1,19 +1,10 @@
-/*
-
-LICENSE GOES HERE
-
-*/
-
 import React from "react";
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import { Route as RRoute } from "react-router-dom";
 import { Router as RRouter } from "react-router-dom"; // NOT A TYPO
-import Router from "react-router-dom";
 import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom/extend-expect";
 
 import Login from "../Components/Login";
-
 import "../setupTests";
 
 /**
@@ -24,10 +15,6 @@ import "../setupTests";
  * Authored by: Group 25
  * Leila Moran (GitHub ID: snapcat)
  * Shraddha Mishra (GitHub ID: shraddhamishra7)
- * 
- *
- * NAME (GitHub ID: GHID)
- *
  * */
 
 /*
@@ -63,7 +50,9 @@ describe("Login tests", () => {
     const loginb = getByTestId("login_button");
     fireEvent.click(loginb);
 
-    const logtext = getByText(/Enter your email and password to view your projects/i);
+    const logtext = getByText(
+      /Enter your email and password to view your projects/i
+    );
     expect(logtext).toBeInTheDocument();
 
     const placeholderemail = getByText("Email Address");
@@ -80,14 +69,14 @@ describe("Login tests", () => {
   });
 
   it("tests logging in", () => {
+    // async ()
     const history = createMemoryHistory();
     history.push("/:id");
-    const { getByTestId, getByText, getByRole, queryByText } =
-      render(
-        <RRouter history={history}>
-          <Login />
-        </RRouter>
-      );
+    const { getByTestId, getByText, getByRole, queryByText } = render(
+      <RRouter history={history}>
+        <Login />
+      </RRouter>
+    );
 
     const loginb = getByTestId("login_button");
     fireEvent.click(loginb);
@@ -101,23 +90,31 @@ describe("Login tests", () => {
     fireEvent.click(can);
     fireEvent.click(loginb);
 
+    //fireEvent.click(sub);
+    //const err = queryByText(/Error: /i);
+    //await screen.findByText(/Error: /i);
+    //await waitFor(() => expect(err).toBeInTheDocument());
+
     const add = getByTestId("login_inputEmail");
     const ress = "test@test.com";
 
     const pass = getByTestId("login_inputPassword");
     const word = "abc";
 
+    expect(pass).toHaveValue("");
+    expect(add).toHaveValue("");
+
     fireEvent.change(pass, { target: { value: word } });
     fireEvent.change(add, { target: { value: ress } });
 
     fireEvent.click(sub);
 
-    //const whee = screen.getByText("whee");
+    expect(pass).toHaveValue(word);
+    expect(add).toHaveValue(ress);
 
     // const err = screen.getByText(/Error: /i);
     // expect(err).toBeInTheDocument();
     // Error: We are unable to find a user with that email. Please double check you entered your email correctly
     // Error: Password is incorrect
   });
-
 });

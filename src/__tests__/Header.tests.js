@@ -1,14 +1,6 @@
-/*
-
-LICENSE GOES HERE
-
-*/
-
 import React from "react";
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import { Route as RRoute } from "react-router-dom";
 import { Router as RRouter } from "react-router-dom"; // NOT A TYPO
-import Router from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
@@ -25,9 +17,6 @@ import "../setupTests";
  * Authored by: Group 25
  * Leila Moran (GitHub ID: snapcat)
  * Shraddha Mishra (GitHub ID: shraddhamishra7)
- *
- * NAME (GitHub ID: GHID)
- *
  * */
 
 /*

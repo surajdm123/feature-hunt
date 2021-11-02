@@ -1,16 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import { Route as RRoute } from "react-router-dom";
 import { Router as RRouter } from "react-router-dom"; // NOT A TYPO
-import Router from "react-router-dom";
 import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom/extend-expect";
 
-import Product from "../Components/Product";
-import Feature from "../Components/Feature";
-
 import ProductTile from "../Components/ProductTile";
-
 import "../setupTests";
 
 /**
@@ -19,10 +13,7 @@ import "../setupTests";
  * GitHub repository: CSC510-Group-25/feature-hunt
  *
  * Authored by: Group 25
- *
  * Leila Moran (GitHub ID: snapcat)
- * NAME (GitHub ID: GHID)
- *
  * */
 
 /*
@@ -34,7 +25,6 @@ data-testid="pt_up:#" -- product tile upvote
 */
 
 describe("Test ProductTile", () => {
-
   // this test doesn't work
   it("tests upvoting a product (TODO)", () => {
     const history = createMemoryHistory();
@@ -141,7 +131,6 @@ describe("Test ProductTile", () => {
     // expect(whee).toBeInTheDocument();
   });
 
-
   it("tests navigating to a product", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
@@ -170,7 +159,7 @@ describe("Test ProductTile", () => {
           index={0}
           setProducts={() => console.log()}
         />
-          <ProductTile
+        <ProductTile
           products={products}
           index={1}
           setProducts={() => console.log()}
@@ -184,16 +173,16 @@ describe("Test ProductTile", () => {
     const downvote1 = getByTestId("pt_down:1");
 
     expect(history.length).toBe(2);
-    const nav = getByTestId("ptnav:0"); //, { product: goto });
+    const nav = getByTestId("ptnav:0");
     const nav2 = getByTestId("ptnav:1");
 
     fireEvent.click(nav);
     expect(history.length).toBe(3); // after clicking on something, history.length + 1
-    expect(history.location.pathname).toBe("/feature-hunt"); // goal: navigate to anti-js
+    expect(history.location.pathname).toBe("/feature-hunt");
 
     fireEvent.click(nav2);
     expect(history.length).toBe(4); // after clicking on something, history.length + 1
-    expect(history.location.pathname).toContain("anti-JS"); // goal: navigate to anti-js
+    expect(history.location.pathname).toContain("anti-JS");
 
     const productName = getByText(/Feature-hunt/i);
     const tagName = getByText(/PRODUCTIVITY/i);

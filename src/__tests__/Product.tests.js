@@ -1,9 +1,3 @@
-/*
-
-LICENSE GOES HERE
-
-*/
-
 import React from "react";
 import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
 import { Router as RRouter } from "react-router-dom"; // NOT A TYPO
