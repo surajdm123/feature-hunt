@@ -45,6 +45,7 @@ const Dashboard = ({query}) => {
               className={sortBy === 'timestamp' ? 'highlight' : ''}
               data-testid="dash_sorttime" 
               onClick={() => setSortBy('timestamp')}>LATEST</p>
+
             </div>
           </div>
         </div>
