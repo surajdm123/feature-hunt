@@ -24,6 +24,7 @@ import "../setupTests";
  *
  * Authored by: Group 25
  * Leila Moran (GitHub ID: snapcat)
+ * Shraddha Mishra (GitHub ID: shraddhamishra7)
  *
  * NAME (GitHub ID: GHID)
  *
@@ -79,7 +80,7 @@ describe("Header tests", () => {
   it("header tests: checks navigation, logout", () => {
     const history = createMemoryHistory();
     history.push("/:id");
-    const { getByTestId, getByText, getByRole } = render(
+    const { getByTestId, getByText, getByRole, queryByText } = render(
       <RRouter history={history}>
         <Header />
       </RRouter>
@@ -117,5 +118,8 @@ describe("Header tests", () => {
     fireEvent.click(logout);
     expect(history.length).toBe(7);
     expect(history.location.pathname).toBe("/");
+
+    const nothere = queryByText(/Your Projects/i); // ensure is absent
+    expect(nothere).not.toBeInTheDocument();
   });
 });
