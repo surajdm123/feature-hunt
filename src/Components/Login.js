@@ -60,7 +60,7 @@ export default function Login({ setLoggedin }) {
       <Button data-testid="login_button" onClick={handleClickOpen}>
         Login
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog data-testid="login_dialog" open={open} onClose={handleClose}>
         <DialogTitle data-testid="login_title">Login</DialogTitle>
         <DialogContent>
           <DialogContentText data-testid="login_text">
@@ -95,7 +95,7 @@ export default function Login({ setLoggedin }) {
         {message !== "" && <Alert severity="error" data-testid="login_error">Error: {message}</Alert>}
         <DialogActions>
           <Button data-testid="login_cancel" onClick={handleClose}>Cancel</Button>
-          <Button data-testid="login_submit" onClick={handleSubmit}>Sumbit</Button>
+          <Button data-testid="login_submit" onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
