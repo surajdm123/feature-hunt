@@ -36,7 +36,7 @@ data-testid="pt_up:#" -- product tile upvote
 describe("Test ProductTile", () => {
 
   // this test doesn't work
-  it("tests upvoting on a product (TODO)", () => {
+  it("tests upvoting a product (TODO)", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
 
@@ -88,7 +88,7 @@ describe("Test ProductTile", () => {
   });
 
   // this test doesn't work
-  it("tests downvoting on a product (TODO)", () => {
+  it("tests downvoting a product (TODO)", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
 
@@ -129,6 +129,8 @@ describe("Test ProductTile", () => {
 
     // coverage click
     const upvote = getByTestId("pt_up:0");
+    fireEvent.click(downvote);
+    fireEvent.click(upvote);
     fireEvent.click(upvote);
 
     // uncomment the two lines below in VS Code.
@@ -176,6 +178,11 @@ describe("Test ProductTile", () => {
       </RRouter>
     );
 
+    const upvote0 = getByTestId("pt_up:0");
+    const downvote0 = getByTestId("pt_down:0");
+    const upvote1 = getByTestId("pt_up:1");
+    const downvote1 = getByTestId("pt_down:1");
+
     expect(history.length).toBe(2);
     const nav = getByTestId("ptnav:0"); //, { product: goto });
     const nav2 = getByTestId("ptnav:1");
@@ -196,10 +203,10 @@ describe("Test ProductTile", () => {
     expect(decscription).toBeInTheDocument();
 
     // coverage clicks
-    const upvote = getByTestId("pt_up:1");
-    const downvote = getByTestId("pt_down:1");
-    fireEvent.click(upvote);
-    fireEvent.click(downvote);
+    fireEvent.click(upvote0);
+    fireEvent.click(downvote0);
+    fireEvent.click(upvote1);
+    fireEvent.click(downvote1);
 
     const productName2 = getByText(/Anti-JS/i);
     const tagName2 = getByText(/depression/i);

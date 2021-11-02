@@ -130,6 +130,13 @@ describe("Test Product", () => {
     // coverage clicks
     fireEvent.click(timesort);
     fireEvent.click(popsort);
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    // const whee = screen.getByText("whee");
+    // expect(whee).toBeInTheDocument();
   });
 
   it("tests adding empty feature to an empty list", () => {
@@ -160,6 +167,13 @@ describe("Test Product", () => {
     // coverage clicks
     fireEvent.click(timesort);
     fireEvent.click(popsort);
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    // const whee = screen.getByText("whee");
+    // expect(whee).toBeInTheDocument();
   });
 
   it("tests adding a feature to an existing list of features", () => {
@@ -220,6 +234,13 @@ describe("Test Product", () => {
     // coverage clicks
     fireEvent.click(timesort);
     fireEvent.click(popsort);
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    // const whee = screen.getByText("whee");
+    // expect(whee).toBeInTheDocument();
   });
 
   it("tests adding an empty feature to an existing list of features", () => {
@@ -278,5 +299,12 @@ describe("Test Product", () => {
     // coverage clicks
     fireEvent.click(timesort);
     fireEvent.click(popsort);
+
+    // uncomment the two lines below in VS Code.
+    // In the terminal, enter: npm run test.
+    // The document should appear.
+
+    // const whee = screen.getByText("whee");
+    // expect(whee).toBeInTheDocument();
   });
 });
