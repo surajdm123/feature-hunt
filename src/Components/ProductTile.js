@@ -37,7 +37,7 @@ const ProductTile = ({ products, index, setProducts }) => {
         <div className="content">
           <div className="product-content">
             <span className="product-title" 
-            data-testid="pt_nav" 
+            data-testid={"ptnav:"+index}
             onClick={goTo(products[index].name)} 
             style={{ marginTop: 'auto', marginBottom: 'auto' }}>
               {capitalizeFirstLetter(products[index].name)}
@@ -59,7 +59,7 @@ const ProductTile = ({ products, index, setProducts }) => {
           <span>
             <FontAwesomeIcon icon={faChevronUp} size="lg" 
             className={products[index].upVoted ? 'votedUp' : 'voteup'} 
-            data-testid="pt_up" 
+            data-testid={"pt_up:"+index}
             onClick={upVote} />
           </span>
           <span>
@@ -69,7 +69,7 @@ const ProductTile = ({ products, index, setProducts }) => {
             <FontAwesomeIcon icon={faChevronDown} 
             size="lg" 
             className={products[index].downVoted ? 'votedDown' : 'votedown'} 
-            data-testid="pt_down" 
+            data-testid={"pt_down:"+index}
             onClick={downVote} />
           </span>
         </div>

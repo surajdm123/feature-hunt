@@ -27,9 +27,10 @@ import "../setupTests";
 
 /*
 ProductTile.js test IDs:
-data-testid="pt_nav" -- go to product on click
-data-testid="pt_down" -- product tile downvote
-data-testid="pt_up" -- product tile upvote
+Replace # with the product's index.
+data-testid="ptnav:#" -- go to product on click
+data-testid="pt_down:#" -- product tile downvote
+data-testid="pt_up:#" -- product tile upvote
 */
 
 describe("Test ProductTile", () => {
@@ -59,12 +60,12 @@ describe("Test ProductTile", () => {
       </RRouter>
     );
 
-    const upvote = getByTestId("pt_up");
+    const upvote = getByTestId("pt_up:0");
     fireEvent.click(upvote);
 
     // the two lines below are the lines that don't work.
 
-    //  const nuvote = screen.getByText(/1000/i);
+    // const nuvote = screen.getByText(/1000/i);
     // expect(nuvote).toBeInTheDocument();
 
     const productName = getByText(/Feature-hunt/i);
@@ -75,7 +76,7 @@ describe("Test ProductTile", () => {
     expect(decscription).toBeInTheDocument();
 
     // coverage click
-    const downvote = getByTestId("pt_down");
+    const downvote = getByTestId("pt_down:0");
     fireEvent.click(downvote);
 
     // uncomment the two lines below in VS Code.
@@ -111,7 +112,7 @@ describe("Test ProductTile", () => {
       </RRouter>
     );
 
-    const downvote = getByTestId("pt_down");
+    const downvote = getByTestId("pt_down:0");
     fireEvent.click(downvote);
 
     // the two lines below are the lines that don't work.
@@ -127,7 +128,7 @@ describe("Test ProductTile", () => {
     expect(decscription).toBeInTheDocument();
 
     // coverage click
-    const upvote = getByTestId("pt_up");
+    const upvote = getByTestId("pt_up:0");
     fireEvent.click(upvote);
 
     // uncomment the two lines below in VS Code.
@@ -138,9 +139,8 @@ describe("Test ProductTile", () => {
     // expect(whee).toBeInTheDocument();
   });
 
-  // figure out how to click on a specific product
-  // well... at least navigation works? goal is to navivate to anti-JS
-  it("tests navigating to a product (TODO)", () => {
+
+  it("tests navigating to a product", () => {
     const history = createMemoryHistory();
     history.push("/:id"); // home page
 
@@ -161,27 +161,32 @@ describe("Test ProductTile", () => {
       },
     ];
 
-    const { getByTestId, getByText, getByAltText } = render(
+    const { getByTestId, getByText } = render(
       <RRouter history={history}>
         <ProductTile
           products={products}
           index={0}
           setProducts={() => console.log()}
         />
+          <ProductTile
+          products={products}
+          index={1}
+          setProducts={() => console.log()}
+        />
       </RRouter>
     );
 
     expect(history.length).toBe(2);
-    //const goto = products[1];
-    const nav = getByTestId("pt_nav"); //, { product: goto });
-    //const getp = getByAltText(/Anti-JS/i);
+    const nav = getByTestId("ptnav:0"); //, { product: goto });
+    const nav2 = getByTestId("ptnav:1");
 
     fireEvent.click(nav);
-    //fireEvent.click(goto);
-    //fireEvent.click(getp);
-
     expect(history.length).toBe(3); // after clicking on something, history.length + 1
     expect(history.location.pathname).toBe("/feature-hunt"); // goal: navigate to anti-js
+
+    fireEvent.click(nav2);
+    expect(history.length).toBe(4); // after clicking on something, history.length + 1
+    expect(history.location.pathname).toContain("anti-JS"); // goal: navigate to anti-js
 
     const productName = getByText(/Feature-hunt/i);
     const tagName = getByText(/PRODUCTIVITY/i);
@@ -191,17 +196,14 @@ describe("Test ProductTile", () => {
     expect(decscription).toBeInTheDocument();
 
     // coverage clicks
-    const upvote = getByTestId("pt_up");
-    const downvote = getByTestId("pt_down");
+    const upvote = getByTestId("pt_up:1");
+    const downvote = getByTestId("pt_down:1");
     fireEvent.click(upvote);
     fireEvent.click(downvote);
 
-    // the block below doesn't work
-
-    /*
-    const productName2 = screen.getByText(/Anti-JS/i);
-    const tagName2 = screen.getByText(/depression/i);
-    const decscription2 = screen.getByText(/I really, really hate JavaScript./i);
+    const productName2 = getByText(/Anti-JS/i);
+    const tagName2 = getByText(/depression/i);
+    const decscription2 = getByText(/I really, really hate JavaScript./i);
 
     const over9k = getByText("9001");
     expect(over9k).toBeInTheDocument();
@@ -209,7 +211,6 @@ describe("Test ProductTile", () => {
     expect(productName2).toBeInTheDocument();
     expect(tagName2).toBeInTheDocument();
     expect(decscription2).toBeInTheDocument();
-    */
 
     // uncomment the two lines below in VS Code.
     // In the terminal, enter: npm run test.
