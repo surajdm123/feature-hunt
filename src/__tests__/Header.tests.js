@@ -35,6 +35,11 @@ data-testid="TEXT" -- short description
 
 */
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(),
+}));
+
 describe("Header tests", () => {
   it("renders header: screen checks 1", () => {
     render(<Header />, { wrapper: MemoryRouter });
@@ -128,4 +133,25 @@ describe("Header tests", () => {
     expect(window.open).toHaveBeenCalledTimes(1);
     expect(window.open).toHaveBeenCalledWith(page, "_blank");
   });
+
+  it("header tests: tests search", () => {
+    const history = createMemoryHistory();
+    history.push("/:id");
+    const { getByTestId, getByPlaceholderText } = render(
+      <RRouter history={history}>
+        <Header />
+      </RRouter>
+    );
+    
+    const search = getByTestId("header_input");
+    fireEvent.change(search, { target: { placeholder: "searchword" } });
+
+    fireEvent.keyPress(getByTestId("header_input"), {
+      key: "Enter"
+    });
+
+    const searchword = getByPlaceholderText(/searchword/i);
+    expect(searchword).toBeInTheDocument();
+  });
+
 });
