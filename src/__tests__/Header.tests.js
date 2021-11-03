@@ -111,4 +111,21 @@ describe("Header tests", () => {
     const nothere = queryByText(/Your Projects/i); // ensure is absent
     expect(nothere).not.toBeInTheDocument();
   });
+
+  it("header tests: tests opening a window on submit project", () => {
+    window.open = jest.fn();
+    const history = createMemoryHistory();
+    history.push("/:id");
+    const { getByTestId } = render(
+      <RRouter history={history}>
+        <Header />
+      </RRouter>
+    );
+    const page = "http://tiny.cc/new-project";
+    const submit = getByTestId("header_sub");
+    fireEvent.click(submit);
+
+    expect(window.open).toHaveBeenCalledTimes(1);
+    expect(window.open).toHaveBeenCalledWith(page, "_blank");
+  });
 });
