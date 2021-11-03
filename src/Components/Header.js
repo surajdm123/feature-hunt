@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/header.scss';
 import { useHistory, useLocation } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
+import Login from './Login';
+import SignUp from './SignUp';
+
 function Header({setQuery}) {
   const history = useHistory();
   const goTo = (page) => () => {
@@ -13,6 +17,10 @@ function Header({setQuery}) {
       setQuery(event.target.value);
     }
   };
+
+  const username = ReactSession.get("username");
+  const [loggedin, setLoggedin] = useState(username !== '');
+
   return (
     <div className="header_div">
       <div className="header_container">
@@ -46,12 +54,23 @@ function Header({setQuery}) {
                 <li onClick={goTo('submit-project')}>Submit Project</li>
                 <li onClick={goTo('feature-hunt')}>RoadMap</li>
                 <li onClick={goTo('feedback')}>Feedback</li>
+                {loggedin && <li onClick={goTo('dashboard')}>Your Projects</li>}
+
               </ul>
             </div>
           </div>
-          <div className="auth_button">
-            <button onClick={()=>alert('Coming soon!')} className="signup_button">Login</button>
-          </div>
+
+          {!loggedin && <div className="auth_button">
+            <Login setLoggedin={setLoggedin}/>
+            <SignUp/>
+          </div>}
+          {loggedin && <div className="auth_button">
+            <button onClick={() => {
+              setLoggedin(false); 
+              ReactSession.set("username", "");
+              history.push("/")
+              }} className="signup_button">LogOut</button>
+          </div>}
         </header>
       </div>
     </div>

@@ -11,14 +11,38 @@ import Product from './Components/Product';
 import Comments from './Components/Comments';
 import Header from './Components/Header';
 import Home from './Components/Home';
-import ProjectForm from './Components/ProjectForm';
+import Dashboard from './Components/Dashboard';
+import Feedback from './Components/Feedback';
+
 import {useState} from 'react';
+import {ReactSession} from 'react-client-session';
 
 function App() {
   const [query, setQuery] = useState('');
+  ReactSession.setStoreType("localStorage");
   return (
     <Router>
       <Switch>
+      <Route
+          path="/dashboard"
+          children={
+            <>
+              <Dashboard/>
+            </>
+          }
+        />
+
+
+        <Route
+          path="/feedback"
+          children={
+            <>
+              <Feedback/>
+              <Comments/>
+            </>
+          }
+        />
+
         <Route
           path="/submit-project"
           children={

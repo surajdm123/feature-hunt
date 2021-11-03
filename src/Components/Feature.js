@@ -1,7 +1,10 @@
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { Button, TextField } from '@mui/material';
+import Service from '../Service';
 
-const Feature = ({ features, index, setFeatures }) => {
+const Feature = ({ features, index, setFeatures, editable }) => {
   const upVote = () => {
     const updatedFeature = { ...features[index] };
     let currentVote = updatedFeature.upVoted ? 1 : (updatedFeature.downVoted ? -1 : 0);
@@ -23,6 +26,22 @@ const Feature = ({ features, index, setFeatures }) => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  const [newTag, setNewTag] = useState('');
+
+  const handleTextChange = (e) => {
+    setNewTag(e.target.value);
+  }
+
+  /* TODO : save new tag to database */
+  const addNewTag = () => {
+    features[index]['tags'].push(newTag);
+    const form = new FormData();
+    form.append("features", JSON.stringify(features));
+    Service.post(window.location.pathname + "/features", form).then(data => {});
+    setNewTag('');
+  }
+
   return (
     <div className="child feature">
       <div className="feature-container">
@@ -39,6 +58,16 @@ const Feature = ({ features, index, setFeatures }) => {
                 <div>&nbsp;</div>
               </div>
             )}
+            {editable && 
+            <div>
+              <TextField
+                label="Add New Tag"
+                value={newTag}
+                size="small"
+                onChange={handleTextChange}
+              />
+              <Button onClick={addNewTag}>Add</Button> 
+            </div> }
           </div>
         </div>
         <div className="votes-container">
