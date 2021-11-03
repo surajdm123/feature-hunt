@@ -63,6 +63,7 @@
       "src/**/*.{js,jsx}",
       "!src/index.js",
       "!src/Components/Comments.js",
+      "!src/Service.js",
       "!src/reportWebVitals.js"
     ]
   }
