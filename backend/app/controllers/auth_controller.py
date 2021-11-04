@@ -2,6 +2,15 @@
 # pylint: disable=wrong-import-position,pointless-string-statement,undefined-variable,line-too-long
 from app import *
 
+#################################################################################
+##       Function: signup
+##       Description: Post request to register a new user, will give error if user is already
+##                    registered
+##       Inputs:
+##           - NA
+##       Outputs:
+##           - message: output if user is registered successful or not
+#################################################################################
 @app.route("/signup", methods=['POST'])
 def signup():
     user = request.form.get("fullname")
@@ -28,6 +37,14 @@ def signup():
     message = json.dumps(errorDict)
     return message
 
+#################################################################################
+##       Function: logged_in
+##       Description: Checks if there is a session
+##       Inputs:
+##           - NA
+##       Outputs:
+##           - Sends a valid message or redirects to login url
+#################################################################################
 @app.route('/logged_in')
 def logged_in():
     print(session)
@@ -44,7 +61,14 @@ def logged_in():
     else:
         return redirect(url_for("login"))
 
-
+#################################################################################
+##       Function: login
+##       Description: Checks if user and email is in database to login
+##       Inputs:
+##           - NA
+##       Outputs:
+##           - Returns valid or invalid message if user can login
+#################################################################################
 @app.route("/login", methods=["POST", "GET"])
 def login():
     message = 'Please login to your account'
@@ -87,6 +111,14 @@ def login():
     message = json.dumps(loggedinDict)
     return message
 
+#################################################################################
+##       Function: logout
+##       Description: Checks if user is in session and removes them from it
+##       Inputs:
+##           - NA
+##       Outputs:
+##           - Successful or Unsuccessful Message
+#################################################################################
 @app.route("/logout", methods=["POST", "GET"])
 def logout():
     if "email" in session:
