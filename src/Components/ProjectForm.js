@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import Service from "../Service";
 
 const Styles = styled.div`
  background: #218888;
@@ -61,9 +62,39 @@ const Styles = styled.div`
 
 function ProjectForm() {
   const [submitting, setSubmitting] = useState(false);
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [imageURL, setImageURL] = React.useState("");
+  const [message, setMessage] = React.useState("");
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  }
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  }
+
+  const handleImageURLChange = (e) => {
+    setImageURL(e.target.value);
+  }
   const handleSubmit = event => {
-    event.preventDefault();
-   setSubmitting(true);
+    const form = new FormData();
+    form.append("name", name);
+    form.append("description", description);
+    form.append("imageURL", imageURL);
+    Service.post('addProduct', form)
+      .then(data =>
+        {setMessage(data.message);
+          console.log(data.code);
+          if (data.code > 200) {
+            console.log(message)
+          } else {
+            handleClose();
+          }
+        }).catch(function(err){
+          setMessage("There was a problem with your registration. Please try again later.")
+      });
    }
 
   return (
@@ -77,12 +108,32 @@ function ProjectForm() {
                <h3>PROJECT FORM</h3>
             <fieldset>
               <label>Name</label>
-                <input name="name" />
+                <TextField
+                  id="name"
+                  label="name"
+                  multiline
+                  maxRows={1}
+                  value={value}
+                  onChange={handleNameChange}
+                />
               <label>Description</label>
-                <textarea name="description" rows="4" cols="50" >
-                </textarea>
+                <TextField
+                  id="description"
+                  label="description"
+                  multiline
+                  maxRows={5}
+                  value={value}
+                  onChange={handleDescriptionChange}
+                />
                 <label>Image URL</label>
-                <input name="imageURL" />
+                <TextField
+                  id="imageURL"
+                  label="imageURL"
+                  multiline
+                  maxRows={1}
+                  value={value}
+                  onChange={handleImageURLChange()}
+                />
             </fieldset>
             <button type="submit">Submit</button>
           </form>
