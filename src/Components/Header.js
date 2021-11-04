@@ -58,8 +58,6 @@ function Header({setQuery}) {
                 <li data-testid="header_fb" onClick={goTo('feedback')}>Feedback</li>
                 {loggedin && <li data-testid="header_dash" onClick={goTo('dashboard')}>Your Projects</li>}
 
->>>>>>> main
-
               </ul>
             </div>
           </div>
