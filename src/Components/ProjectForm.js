@@ -91,7 +91,7 @@ function ProjectForm() {
     form.append("productDescription", description);
     form.append("imageUrl", imageURL);
     form.append("email", user);
-    Service.post('addProduct', form)
+    Service.post("addProduct", form)
       .then(data =>
         {setMessage(data.message);
           console.log(data.code);
