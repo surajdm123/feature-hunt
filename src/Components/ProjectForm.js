@@ -92,7 +92,7 @@ function ProjectForm() {
     form.append("imageUrl", imageURL);
     form.append("email", user);
     Service.post("addProduct", form)
-      .then(data =>
+      .then((data) =>
         {setMessage(data.message);
           console.log(data.code);
           if (data.code > 200) {
