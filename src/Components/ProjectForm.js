@@ -67,7 +67,7 @@ function ProjectForm() {
   const [description, setDescription] = React.useState("");
   const [imageURL, setImageURL] = React.useState("");
   const [message, setMessage] = React.useState("");
-  const [user, setUser] = React.useState(['']);
+  const [user, setUser] = React.useState([""]);
 
   React.useEffect(() => {
     setUser(ReactSession.get("username"));
