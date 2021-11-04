@@ -110,14 +110,17 @@ function ProjectForm() {
 
         </div>
       </div>
-          <form onSubmit={handleSubmit}>
+          <form data-testid="submit_form" onSubmit={handleSubmit}>
                <h3>PROJECT FORM</h3>
               <label>Name</label>
                 <TextField
+                  data-testid="form_name"
                   id="name"
                   label=""
                   multiline
                   maxRows={1}
+                  inputProps={{ "data-testid": "form-inputName" }}
+                  value={name}
                   onChange={handleNameChange}
                   fullWidth
                 />
@@ -127,6 +130,8 @@ function ProjectForm() {
                   label=""
                   multiline
                   rows={3}
+                  inputProps={{ "data-testid": "form-Desc" }}
+                  value={description}
                   onChange={handleDescriptionChange}
                   fullWidth
                 />
@@ -136,11 +141,13 @@ function ProjectForm() {
                   label=""
                   multiline
                   maxRows={1}
+                  inputProps={{ "data-testid": "form-Img" }}
+                  value={imageURL}
                   onChange={handleImageURLChange}
                   fullWidth
                 />
 
-            <button type="submit">Submit</button>
+            <button data-testid="submit_button" type="submit">Submit</button>
           </form>
     </div>
   );

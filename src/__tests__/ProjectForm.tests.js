@@ -5,12 +5,12 @@ import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
 
-import Header from "../Components/Header";
+import ProjectForm from "../Components/ProjectForm";
 
 import "../setupTests";
 
 /**
- * This file tests Header.js
+ * This file tests ProjectForm.js
  *
  * GitHub repository: CSC510-Group-25/feature-hunt
  *
@@ -20,42 +20,76 @@ import "../setupTests";
  * */
 
 /*
-Header.js test IDs:
+ProjectForm.js test IDs:
 
-data-testid="header_home" -- click to go to home page
-data-testid="header_input" -- search box
-data-testid="login_header" -- header login button
-data-testid="logout_header" -- header logout button
-data-testid="header_links" -- links in header
-data-testid="header_sub" -- submit project link
-data-testid="header_rm" -- roadmap link
-data-testid="header_fb" -- feedback link
-data-testid="header_dash" -- dashboard link
+data-testid="submit_button" -- 
+data-testid="submit_form" -- submit project from
+"data-testid": "form-Name" -- 
+"data-testid": "form-Desc" -- 
+"data-testid": "form-Img" -- 
 data-testid="TEXT" -- short description
 
 */
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(),
-}));
+describe("ProjectForm tests", () => {
+  it("renders ProjectForm", () => {
+    const history = createMemoryHistory();
+    history.push("/:id");
+    history.push("/dashboard");
+    const { getByTestId, getByText, getByPlaceholderText, getByLabelText } = render(
+      <RRouter history={history}>
+        <ProjectForm />
+      </RRouter>
+    );
+    const form = getByText(/Project Form/i);
+    const name = getByText(/Name/i);
+    const desc = getByText(/Description/i);
+    const img = getByText(/Image URL/i);
+    const sub = getByText(/submit/i);
 
-describe("Header tests", () => {
-  it("renders header: screen checks 1", () => {
-    render(<Header />, { wrapper: MemoryRouter });
-    const submitProject = screen.getByText(/Submit Project/i);
-    const roadmap = screen.getByText(/Roadmap/i);
-    const feedback = screen.getByText(/Feedback/i);
-
-    const logout = screen.getByText(/LogOut/i);
-    expect(logout).toBeInTheDocument();
-
-    expect(submitProject).toBeInTheDocument();
-    expect(roadmap).toBeInTheDocument();
-    expect(feedback).toBeInTheDocument();
+    expect(form).toBeInTheDocument();
+    expect(name).toBeInTheDocument();
+    expect(desc).toBeInTheDocument();
+    expect(img).toBeInTheDocument();
+    expect(sub).toBeInTheDocument();
   });
 
-  test("renders header: screen checks 2", () => {
+  it("ProjectForm: tests input, events", () => {
+    const history = createMemoryHistory();
+    history.push("/:id");
+    history.push("/dashboard");
+    const { getByTestId, getByText, getByPlaceholderText, getByLabelText } = render(
+      <RRouter history={history}>
+        <ProjectForm />
+      </RRouter>
+    );
+    const form = getByText(/Project Form/i);
+
+    const name = getByText(/Name/i);
+    
+    const nuval = getByTestId("form-inputName");
+    const desc = getByTestId("form-Desc");
+    const img = getByTestId("form-Img");
+
+    
+
+    fireEvent.change(nuval, { target: { value: "testname" } });
+    fireEvent.change(desc, { target: { value: "testDesc" } });
+    fireEvent.change(img, { target: { value: "testImg" } });
+
+    const subbutton = getByTestId("submit_button");
+    fireEvent.submit(subbutton);
+
+    const nuname = getByText(/testname/i);
+    expect(nuname).toBeInTheDocument();
+    const nudesc = getByText(/testdesc/i);
+    expect(nudesc).toBeInTheDocument();
+    const nuImg = getByText(/testimg/i);
+    expect(nuImg).toBeInTheDocument();
+
+  });
+
+ /* test("renders header: screen checks 2", () => {
     const history = createMemoryHistory();
     history.push("/:id");
     history.push("/dashboard");
@@ -112,7 +146,7 @@ describe("Header tests", () => {
     expect(logout).toBeInTheDocument();
 
     fireEvent.click(logout);
-    expect(history.length).toBe(8);
+    expect(history.length).toBe(7);
     expect(history.location.pathname).toBe("/");
 
     const nothere = queryByText(/Your Projects/i); // ensure is absent
@@ -137,6 +171,6 @@ describe("Header tests", () => {
 
     const searchword = getByPlaceholderText(/searchword/i);
     expect(searchword).toBeInTheDocument();
-  });
+  });*/
 
 });
