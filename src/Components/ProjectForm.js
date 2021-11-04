@@ -81,9 +81,9 @@ function ProjectForm() {
 
   const handleSubmit = event => {
     const form = new FormData();
-    form.append("name", name);
-    form.append("description", description);
-    form.append("imageURL", imageURL);
+    form.append("productName", name);
+    form.append("productDescription", description);
+    form.append("imageUrl", imageURL);
     Service.post('addProduct', form)
       .then(data =>
         {setMessage(data.message);
@@ -92,7 +92,7 @@ function ProjectForm() {
             console.log(message)
           }
         }).catch(function(err){
-          setMessage("There was a problem with your registration. Please try again later.")
+          setMessage("There was a problem submitting your product. Please try again later.")
       });
    }
 
