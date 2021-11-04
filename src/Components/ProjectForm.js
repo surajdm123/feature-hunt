@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactSession } from 'react-client-session';
 import styled from "styled-components";
 import TextField from '@mui/material/TextField';
 import Service from "../Service";
@@ -66,6 +67,11 @@ function ProjectForm() {
   const [description, setDescription] = React.useState("");
   const [imageURL, setImageURL] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [user, setUser] = React.useState(['']);
+
+  React.useEffect(() => {
+    setUser(ReactSession.get("username"));
+  }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -81,9 +87,10 @@ function ProjectForm() {
 
   const handleSubmit = event => {
     const form = new FormData();
-    form.append("name", name);
-    form.append("description", description);
-    form.append("imageURL", imageURL);
+    form.append("productName", name);
+    form.append("productDescription", description);
+    form.append("imageUrl", imageURL);
+    form.append("email", user);
     Service.post('addProduct', form)
       .then(data =>
         {setMessage(data.message);
@@ -92,7 +99,7 @@ function ProjectForm() {
             console.log(message)
           }
         }).catch(function(err){
-          setMessage("There was a problem with your registration. Please try again later.")
+          setMessage("There was a problem submitting your product. Please try again later.")
       });
    }
 
