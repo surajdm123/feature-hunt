@@ -35,10 +35,6 @@ data-testid="TEXT" -- short description
 
 */
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(),
-}));
 
 describe("Header tests", () => {
   it("renders header: screen checks 1", () => {
@@ -87,7 +83,6 @@ describe("Header tests", () => {
     expect(submittext).toBeInTheDocument();
 
     // links
-
     const submit = getByTestId("header_sub");
     const dash = getByTestId("header_dash");
     const feedback = getByTestId("header_fb");
@@ -105,43 +100,21 @@ describe("Header tests", () => {
     expect(history.length).toBe(5);
     fireEvent.click(submit);
     expect(history.length).toBe(6);
+    fireEvent.click(feedback);
+    expect(history.length).toBe(7);
     expect(history.location.pathname).toBe("/feedback");
 
     const logout = getByRole("button", { name: /LogOut/i }); // id: "logout_header"
     expect(logout).toBeInTheDocument();
 
     fireEvent.click(logout);
-<<<<<<< HEAD
-    expect(history.length).toBe(7);
-=======
     expect(history.length).toBe(8);
->>>>>>> main
     expect(history.location.pathname).toBe("/");
 
     const nothere = queryByText(/Your Projects/i); // ensure is absent
     expect(nothere).not.toBeInTheDocument();
   });
 
-<<<<<<< HEAD
-  it("header tests: tests opening a window on submit project", () => {
-    window.open = jest.fn();
-    const history = createMemoryHistory();
-    history.push("/:id");
-    const { getByTestId } = render(
-      <RRouter history={history}>
-        <Header />
-      </RRouter>
-    );
-    const page = "http://tiny.cc/new-project";
-    const submit = getByTestId("header_sub");
-    fireEvent.click(submit);
-
-    expect(window.open).toHaveBeenCalledTimes(1);
-    expect(window.open).toHaveBeenCalledWith(page, "_blank");
-  });
-
-=======
->>>>>>> main
   it("header tests: tests search", () => {
     const history = createMemoryHistory();
     history.push("/:id");
