@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
 import Service from "../Service";
 
 const Styles = styled.div`
@@ -24,7 +26,7 @@ const Styles = styled.div`
    flex-direction: column;
    justify-content: space-around;
    margin: 0 auto;
-   max-width: 500px;
+   max-width: 1000px;
    padding: 50px 200px;
  }
 
@@ -61,7 +63,6 @@ const Styles = styled.div`
 `;
 
 function ProjectForm() {
-  const [submitting, setSubmitting] = useState(false);
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [imageURL, setImageURL] = React.useState("");
@@ -78,6 +79,7 @@ function ProjectForm() {
   const handleImageURLChange = (e) => {
     setImageURL(e.target.value);
   }
+
   const handleSubmit = event => {
     const form = new FormData();
     form.append("name", name);
@@ -89,8 +91,6 @@ function ProjectForm() {
           console.log(data.code);
           if (data.code > 200) {
             console.log(message)
-          } else {
-            handleClose();
           }
         }).catch(function(err){
           setMessage("There was a problem with your registration. Please try again later.")
@@ -106,35 +106,34 @@ function ProjectForm() {
       </div>
           <form onSubmit={handleSubmit}>
                <h3>PROJECT FORM</h3>
-            <fieldset>
               <label>Name</label>
                 <TextField
                   id="name"
-                  label="name"
+                  label=""
                   multiline
                   maxRows={1}
-                  value={value}
                   onChange={handleNameChange}
+                  fullWidth
                 />
               <label>Description</label>
                 <TextField
                   id="description"
-                  label="description"
+                  label=""
                   multiline
-                  maxRows={5}
-                  value={value}
+                  rows={3}
                   onChange={handleDescriptionChange}
+                  fullWidth
                 />
                 <label>Image URL</label>
                 <TextField
                   id="imageURL"
-                  label="imageURL"
+                  label=""
                   multiline
                   maxRows={1}
-                  value={value}
-                  onChange={handleImageURLChange()}
+                  onChange={handleImageURLChange}
+                  fullWidth
                 />
-            </fieldset>
+
             <button type="submit">Submit</button>
           </form>
     </div>
