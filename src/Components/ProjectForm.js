@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactSession } from 'react-client-session';
 import styled from "styled-components";
 import TextField from '@mui/material/TextField';
 import Service from "../Service";
@@ -66,6 +67,11 @@ function ProjectForm() {
   const [description, setDescription] = React.useState("");
   const [imageURL, setImageURL] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [user, setUser] = React.useState(['']);
+
+  React.useEffect(() => {
+    setUser(ReactSession.get("username"));
+  }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -84,6 +90,7 @@ function ProjectForm() {
     form.append("productName", name);
     form.append("productDescription", description);
     form.append("imageUrl", imageURL);
+    form.append("email", user);
     Service.post('addProduct', form)
       .then(data =>
         {setMessage(data.message);
