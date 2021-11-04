@@ -85,7 +85,7 @@ function ProjectForm() {
     setImageURL(e.target.value);
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     const form = new FormData();
     form.append("productName", name);
     form.append("productDescription", description);
