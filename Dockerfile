@@ -5,7 +5,6 @@ COPY ./package.json /usr/src/app/package.json
 WORKDIR /usr/src/app
 # install dependencies first so that they can be cached
 RUN npm install
-RUN npm i styled-components
 EXPOSE 3000
 # copy the code
 COPY . ./
