@@ -172,7 +172,7 @@ function ProjectForm() {
                   fullWidth
                 />
 
-            <button data-testid="submit_button" type="submit">Submit</button>
+            <button data-testid="submit_button" onClick={handleSubmit}>Submit</button>
           </form>
     </div>
   );
