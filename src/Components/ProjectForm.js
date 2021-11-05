@@ -62,6 +62,14 @@ const Styles = styled.div`
    margin: 20px 0px;
 `;
 
+//
+//       Component: ProjectFrom
+//       Description: This component displays the form for a user to submit a new project
+//
+//       Inputs:
+//           - NA
+//       Outputs:
+//          - NA
 function ProjectForm() {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
