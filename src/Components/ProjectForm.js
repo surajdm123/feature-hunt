@@ -166,7 +166,7 @@ function ProjectForm() {
                   label=""
                   multiline
                   maxRows={1}
-                  inputProps={{ "data-testid": "form-Img" }}
+                  inputProps={{ "data-testid": "form-Tags" }}
                   value={tags}
                   onChange={handleTagsChange}
                   fullWidth
