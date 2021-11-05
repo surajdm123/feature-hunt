@@ -75,9 +75,10 @@ Outputs:
 
 
 @app.route('/<productname>/getFeature', methods=['GET', 'POST'])
-def get_feature(product_name):
+def get_feature(productname):
     if request.method == 'GET':
-        data = product_records.find({"name": product_name})
+        print(productname, flush=True)
+        data = product_records.find({"name": productname})
         return dumps(data)
 
 
@@ -92,7 +93,7 @@ Outputs:
 
 
 @app.route('/<productname>/features', methods=['GET', 'POST'])
-def features(product_name):
+def features(productname):
     result = ''
     if request.method == 'POST':
         data = request.form.get('features')
@@ -105,5 +106,5 @@ def features(product_name):
         result = product_records.find_one_and_update({"name": productname}, {"$set": {"features": data}})
 
     elif request.method == 'GET':
-        result = product_records.find({"name": product_name}, {"features": 1})
+        result = product_records.find({"name": productname}, {"features": 1})
     return dumps(result)

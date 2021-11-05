@@ -35,7 +35,7 @@ const Product = ({query}) => {
   useEffect(() => {
     console.log(window.location.pathname);
     setUser(ReactSession.get("username"));
-    Service.get(window.location.pathname).then(data => {
+    Service.get(window.location.pathname + "/getFeature").then(data => {
       setFeatures(data[0] ? data[0].features : []);
       if (data[0] && data[0].users && data[0].users.includes(user)) {
         setEditable(true);
