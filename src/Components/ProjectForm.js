@@ -76,6 +76,7 @@ function ProjectForm() {
   const [imageURL, setImageURL] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [user, setUser] = React.useState([""]);
+  const [tags, setTags] = React.useState("");
 
   React.useEffect(() => {
     setUser(ReactSession.get("username"));
@@ -93,12 +94,17 @@ function ProjectForm() {
     setImageURL(e.target.value);
   }
 
+  const handleTagsChange = (e) => {
+    setTags(e.target.value);
+  }
+
   const handleSubmit = (event) => {
     const form = new FormData();
     form.append("productName", name);
     form.append("productDescription", description);
     form.append("imageUrl", imageURL);
     form.append("email", user);
+    form.append("tags", tags);
     Service.post("addProduct", form)
       .then((data) =>
         {setMessage(data.message);
@@ -152,6 +158,17 @@ function ProjectForm() {
                   inputProps={{ "data-testid": "form-Img" }}
                   value={imageURL}
                   onChange={handleImageURLChange}
+                  fullWidth
+                />
+              <label>Tags</label>
+                <TextField
+                  id="tags"
+                  label=""
+                  multiline
+                  maxRows={1}
+                  inputProps={{ "data-testid": "form-Img" }}
+                  value={tags}
+                  onChange={handleTagsChange}
                   fullWidth
                 />
 
