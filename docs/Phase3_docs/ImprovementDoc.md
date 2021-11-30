@@ -33,7 +33,7 @@ Basic Form                 |  Improved Form with Tags and Contributors <br><img 
 No Project Description     |  Added Project Description <br><img src="https://github.com/Ashnayak/feature-hunt/blob/d2e421c58edddf0c3ab9ce9076f8f91f6fb80171/docs/screenshots/WhatsApp%20Image%202021-11-29%20at%2012.12.21%20PM.jpeg" width="500" />
 
 ## Tools used
-The original team used React, JavaScript, Python3, Flask, MongoDB, HTML and CSS. In addition to these, we have used Bootstrap.
+The original team used React, JavaScript, Python3, Flask, MongoDB, HTML and CSS. In addition to this tech stack, we have also used Bootstrap for creating the login and sign up page.
 
 ## Conclusion of Phase 3
 Working on Phase 3 was an eye-opening simulation of how Software Engineering project development occurs in the real world. Countless brainstorming sessions to whip up a myriad of creative ideas which we brought to fruition, in short, the Phase 3 sojourn was a memorable learning experience. We would like to thank Dr. Timothy Menzies for helping us understand the process of building a good Software Engineering project. We would also like to thank the teaching assistants Xiao Ling, Andre Lustosa, Kewen Peng, Weichen Shi for their support throughout the project. We are grateful for the opportunity to work with our friends and colleagues at NCSU - shout out to the developers of Phase 1 and Phase 2 for their contribution to this amazing project!
