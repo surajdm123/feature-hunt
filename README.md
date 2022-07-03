@@ -31,8 +31,8 @@ Feature Hunt is a platform that allows you to do just that. Users can share/vote
 
 ### Watch this short video to know more:
 
-https://user-images.githubusercontent.com/26930183/135515516-d84f3a28-6d8c-49de-8068-50748e2a76b0.mp4
-https://user-images.githubusercontent.com/42051115/140450152-61fcce18-c307-41bc-bfa4-92afe4fc1c40.mp4
+- https://user-images.githubusercontent.com/26930183/135515516-d84f3a28-6d8c-49de-8068-50748e2a76b0.mp4
+- https://user-images.githubusercontent.com/42051115/140450152-61fcce18-c307-41bc-bfa4-92afe4fc1c40.mp4
 
 
 https://user-images.githubusercontent.com/78971563/140450270-8782b2f8-3634-4bdc-86d6-4e4bbcf19a4a.mp4
